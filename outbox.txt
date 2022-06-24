@@ -1,0 +1,6 @@
+outbox
+   -id
+   -content
+   -subscription_id
+   -status(completed/uncompleted)
+   -priority(int)
