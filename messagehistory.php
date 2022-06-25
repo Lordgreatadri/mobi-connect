@@ -248,7 +248,7 @@ class MessageHistory{
 		$stmt->execute();
 
 		//close db connection
-		// $this->closeDB();
+		 $this->closeDB();
 
 	}
 

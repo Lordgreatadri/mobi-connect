@@ -118,16 +118,17 @@ if(!empty($update) || $update != ""){
 			$deliveryResponse->setCommand($update["requestParam"]["command"]);
 			$deliveryResponse->setTransactionId($update["requestParam"]["data"][7]["value"]);
 			$deliveryResponse->setPlanId($update["requestParam"]["planId"]);
-			
-
 			$deliveryResponse->logDeliveryRespnse();
 
 
 
+
+			$updateMessageHistory = new MessageHistory;
+
 			#updating the contentpush delivery response in the messagehistory table....
-			$deliveryResponse->setStatusMessage($update["requestParam"]["data"][6]["value"]);
-			$deliveryResponse->setTransactionId($update["requestParam"]["data"][7]["value"]);
-			$deliveryResponse->updateDeliveryResponse();
+			$updateMessageHistory->setStatusMessage($update["requestParam"]["data"][6]["value"]);
+			$updateMessageHistory->setTransactionId($update["requestParam"]["data"][7]["value"]);
+			$updateMessageHistory->updateDeliveryResponse();
 			// var_dump($update["requestParam"]["planId"]);
 			// // var_dump($update["requestParam"]["data"][2]["value"]) ;
 		}catch(Exception $e){
