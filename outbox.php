@@ -73,7 +73,7 @@ class Outbox{
 
 	public function getMessage(){
 
-		$sql = 'SELECT * from '. $this->tableName .' WHERE subscription_id = :subscription_id AND status = :status AND scheduled_date=:scheduled_date ORDER BY priority ASC LIMIT 1';
+		$sql = 'SELECT * from '. $this->tableName .' WHERE subscription_id = :subscription_id AND status = :status AND scheduled_date = :scheduled_date ORDER BY priority ASC LIMIT 1';
 		$stmt = $this->dbConn->prepare($sql);
 		$stmt->bindParam(':subscription_id', $this->subscription_id);
 		$stmt->bindParam(':status', $this->status);
