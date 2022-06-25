@@ -24,6 +24,7 @@ class MessageHistory{
 	private $Type;
 	private $Description;
 	private $command;
+	private $planId;
 
 
 	public function __construct() {
@@ -203,7 +204,16 @@ class MessageHistory{
 
 		$this->command = $command;
 	}
-	
+	// get planId
+	public function getPlanId(){
+
+		 return $this->planId;
+	}
+	// set planId
+	public function setPlanId($planId){
+
+		$this->planId = $planId;
+	}
 
 
 	public function logMessage(){
@@ -247,7 +257,7 @@ class MessageHistory{
 	public function logDeliveryRespnse(){
 
 
-		$sql = 'INSERT INTO ' . $this->tableName2 . '(delivery_reciept_id, Msisdn, CorrelatorId, Status, LinkId, Refund, Type, Description, command, transactionId) VALUES(null, :Msisdn, :CorrelatorId, :Status, :LinkId, :Refund, :Type, :Description, :command, :transactionId)';
+		$sql = 'INSERT INTO ' . $this->tableName2 . '(delivery_reciept_id, Msisdn, CorrelatorId, Status, LinkId, Refund, Type, Description, command, transactionId, planId) VALUES(null, :Msisdn, :CorrelatorId, :Status, :LinkId, :Refund, :Type, :Description, :command, :transactionId, :planId)';
 
 		$stmt = $this->dbConn->prepare($sql);
 		$stmt->bindParam(':Msisdn', $this->Msisdn);
@@ -259,10 +269,11 @@ class MessageHistory{
 		$stmt->bindParam(':Description', $this->Description);
 		$stmt->bindParam(':command', $this->command);
 		$stmt->bindParam(':transactionId', $this->transactionId);
+		$stmt->bindParam(':planId', $this->planId);
 		$stmt->execute();
 
 
-		//close db connection
+		//close db connection planId
 		$this->closeDB();
 
 	}
