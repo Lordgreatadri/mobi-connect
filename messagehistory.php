@@ -16,6 +16,7 @@ class MessageHistory{
 	private $tableName2 = "delivery_reciept";
     private $db = '';
 	private $dbConn = '';
+
 	private $CorrelatorId;
 	private $Status;
 	private $LinkId;
@@ -123,7 +124,16 @@ class MessageHistory{
 		$this->offerId = $offerId;
 	}
 
-	
+	#get delivery response
+	public function getDeliveryResponse(){
+
+		 return $this->deliveryResponse;
+	}
+	#set delivery response
+	public function setDeliveryResponse($deliveryResponse){
+
+		$this->deliveryResponse = $deliveryResponse;
+	}
 	// get CorrelatorId
 	public function getCorrelatorId(){
 
@@ -231,11 +241,7 @@ class MessageHistory{
 	#update content push delivery response
 	public function updateDeliveryResponse(){
 
-<<<<<<< HEAD
 		$sql = 'UPDATE '. $this->tableName.' SET statusMessage = :statusMessage  WHERE transactionId = :transactionId';
-=======
-		$sql = 'UPDATE '. $this->tableName.' SET statusMessage =:statusMessage  WHERE transactionId = :transactionId';
->>>>>>> 581718810fbbcb86ff07d3308dc33f1c49310506
 		$stmt = $this->dbConn->prepare($sql);
 		$stmt->bindParam(':statusMessage', $this->statusMessage);
 		$stmt->bindParam(':transactionId', $this->transactionId);
@@ -268,13 +274,8 @@ class MessageHistory{
 
 
 		//close db connection planId
-		// $this->closeDB();
+		$this->closeDB();
 
-	}
-
-
-	public function closeDB(){
-		$this->dbConn = $this->db->disconnect();
 	}
 
 
