@@ -107,9 +107,29 @@ if(!empty($update) || $update != ""){
 		try{
 			$deliveryResponse = new MessageHistory;
 
+			#logging all delivery response to delivery_reciept table....
+			$deliveryResponse->setMsisdn($update["externalServiceId"]);
+			$deliveryResponse->setCorrelatorId($update["requestParam"]["data"][1]["value"]);
+			$deliveryResponse->setStatus($update["requestParam"]["data"][2]["value"]);
+			$deliveryResponse->setLinkId($update["requestParam"]["data"][3]["value"]);
+			$deliveryResponse->setRefund($update["requestParam"]["data"][4]["value"]);
+			$deliveryResponse->setType($update["requestParam"]["data"][5]["value"]);
+			$deliveryResponse->setDescription($update["requestParam"]["data"][6]["value"]);
+			$deliveryResponse->setCommand($update["requestParam"]["command"]);
+			$deliveryResponse->setTransactionId($update["requestParam"]["data"][7]["value"]);
+			$deliveryResponse->setPlanId($update["requestParam"]["planId"]);
+			
+
+			$deliveryResponse->logDeliveryRespnse();
+
+
+
+			#updating the contentpush delivery response in the messagehistory table....
 			$deliveryResponse->setDeliveryResponse($update["requestParam"]["data"][6]["value"]);
 			$deliveryResponse->setTransactionId($update["requestParam"]["data"][7]["value"]);
 			$deliveryResponse->updateDeliveryResponse();
+			// var_dump($update["requestParam"]["planId"]);
+			// // var_dump($update["requestParam"]["data"][2]["value"]) ;
 		}catch(Exception $e){
 
 			echo "Error ".$e;
