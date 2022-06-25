@@ -123,16 +123,7 @@ class MessageHistory{
 		$this->offerId = $offerId;
 	}
 
-	#get delivery response
-	public function getDeliveryResponse(){
-
-		 return $this->deliveryResponse;
-	}
-	#set delivery response
-	public function setDeliveryResponse($deliveryResponse){
-
-		$this->deliveryResponse = $deliveryResponse;
-	}
+	
 	// get CorrelatorId
 	public function getCorrelatorId(){
 
@@ -242,7 +233,7 @@ class MessageHistory{
 
 		$sql = 'UPDATE '. $this->tableName.' SET statusMessage =:statusMessage  WHERE transactionId =:transactionId';
 		$stmt = $this->dbConn->prepare($sql);
-		$stmt->bindParam(':statusMessage', $this->deliveryResponse);
+		$stmt->bindParam(':statusMessage', $this->statusMessage);
 		$stmt->bindParam(':transactionId', $this->transactionId);
 		$stmt->execute();
 

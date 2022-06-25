@@ -125,7 +125,7 @@ if(!empty($update) || $update != ""){
 
 
 			#updating the contentpush delivery response in the messagehistory table....
-			$deliveryResponse->setDeliveryResponse($update["requestParam"]["data"][6]["value"]);
+			$deliveryResponse->setStatusMessage($update["requestParam"]["data"][6]["value"]);
 			$deliveryResponse->setTransactionId($update["requestParam"]["data"][7]["value"]);
 			$deliveryResponse->updateDeliveryResponse();
 			// var_dump($update["requestParam"]["planId"]);
