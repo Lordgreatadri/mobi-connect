@@ -12,9 +12,19 @@ class MessageHistory{
 	private $message;
 	private $Msisdn;
 	private $offerId;
-	private $tableName = 'message_history';
+	private $tableName  = 'message_history';
+	private $tableName2 = "delivery_reciept";
     private $db = '';
 	private $dbConn = '';
+
+	private $CorrelatorId;
+	private $Status;
+	private $LinkId;
+	private $Refund;
+	private $Type;
+	private $Description;
+	private $command;
+
 
 	public function __construct() {
 		$this->db = new DbConnect();
@@ -123,11 +133,83 @@ class MessageHistory{
 
 		$this->deliveryResponse = $deliveryResponse;
 	}
+	// get CorrelatorId
+	public function getCorrelatorId(){
+
+		 return $this->CorrelatorId;
+	}
+	// set CorrelatorId
+	public function setCorrelatorId($CorrelatorId){
+
+		$this->CorrelatorId = $CorrelatorId;
+	}
+
+	public function getStatus(){
+
+		 return $this->Status;
+	}
+
+	public function setStatus($Status){
+
+		$this->Status = $Status;
+	}
+	// get LinkId
+	public function getLinkId(){
+
+		 return $this->LinkId;
+	}
+	// set LinkId
+	public function setLinkId($LinkId){
+
+		$this->LinkId = $LinkId;
+	}
+	// get Refund
+	public function getRefund(){
+
+		 return $this->Refund;
+	}
+	// set Refund
+	public function setRefund($Refund){
+
+		$this->Refund = $Refund;
+	}
+	// get Type
+	public function getType(){
+
+		 return $this->Type;
+	}
+	// set Type
+	public function setType($Type){
+
+		$this->Type = $Type;
+	}
+	// get Description
+	public function getDescription(){
+
+		 return $this->Description;
+	}
+	// set Description
+	public function setDescription($Description){
+
+		$this->Description = $Description;
+	}
+	// get command
+	public function getCommand(){
+
+		 return $this->command;
+	}
+	// set command
+	public function setCommand($command){
+
+		$this->command = $command;
+	}
+	
+
 
 	public function logMessage(){
 
 
-		$sql = 'INSERT INTO ' . $this->tableName . '(sms_log_id, statusCode, statusMessage, message, Msisdn, offerId, transactionId, sms_time) VALUES(null, :statusCode, :statusMessage, :message, :Msisdn, :offerId, :transactionId, :sms_time)';
+		$sql = 'INSERT INTO ' . $this->tableName. '(sms_log_id, statusCode, statusMessage, message, Msisdn, offerId, transactionId, sms_time) VALUES(null, :statusCode, :statusMessage, :message, :Msisdn, :offerId, :transactionId, :sms_time)';
 
 		$stmt = $this->dbConn->prepare($sql);
 		$stmt->bindParam(':statusCode', $this->statusCode);
@@ -139,7 +221,11 @@ class MessageHistory{
 		$stmt->bindParam(':sms_time', $this->sms_time);
 		$stmt->execute();
 
+		//close db connection
+		$this->closeDB();
+
 	}
+
 
 
 	#update content push delivery response
@@ -155,6 +241,33 @@ class MessageHistory{
 		$this->closeDB();
 
 	}
+
+
+
+	public function logDeliveryRespnse(){
+
+
+		$sql = 'INSERT INTO ' . $this->tableName2 . '(delivery_reciept_id, Msisdn, CorrelatorId, Status, LinkId, Refund, Type, Description, command, transactionId) VALUES(null, :Msisdn, :CorrelatorId, :Status, :LinkId, :Refund, :Type, :Description, :command, :transactionId)';
+
+		$stmt = $this->dbConn->prepare($sql);
+		$stmt->bindParam(':Msisdn', $this->Msisdn);
+		$stmt->bindParam(':CorrelatorId', $this->CorrelatorId);
+		$stmt->bindParam(':Status', $this->Status);
+		$stmt->bindParam(':LinkId', $this->LinkId);
+		$stmt->bindParam(':Refund', $this->Refund);
+		$stmt->bindParam(':Type', $this->Type);
+		$stmt->bindParam(':Description', $this->Description);
+		$stmt->bindParam(':command', $this->command);
+		$stmt->bindParam(':transactionId', $this->transactionId);
+		$stmt->execute();
+
+
+		//close db connection
+		$this->closeDB();
+
+	}
+
+
 }
 
 ?>
