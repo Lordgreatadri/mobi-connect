@@ -16,7 +16,6 @@ class MessageHistory{
 	private $tableName2 = "delivery_reciept";
     private $db = '';
 	private $dbConn = '';
-
 	private $CorrelatorId;
 	private $Status;
 	private $LinkId;
@@ -276,6 +275,11 @@ class MessageHistory{
 		//close db connection planId
 		$this->closeDB();
 
+	}
+
+
+	public function closeDB(){
+		$this->dbConn = $this->db->disconnect();
 	}
 
 
