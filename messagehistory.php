@@ -231,7 +231,7 @@ class MessageHistory{
 	#update content push delivery response
 	public function updateDeliveryResponse(){
 
-		$sql = 'UPDATE '. $this->tableName.' SET statusMessage =:statusMessage  WHERE transactionId =:transactionId';
+		$sql = 'UPDATE '. $this->tableName.' SET statusMessage =:statusMessage  WHERE transactionId = :transactionId';
 		$stmt = $this->dbConn->prepare($sql);
 		$stmt->bindParam(':statusMessage', $this->statusMessage);
 		$stmt->bindParam(':transactionId', $this->transactionId);
