@@ -279,6 +279,11 @@ class MessageHistory{
 	}
 
 
+	public function closeDB(){
+		$this->dbConn = $this->db->disconnect();
+	}
+
+
 }
 
 ?>
