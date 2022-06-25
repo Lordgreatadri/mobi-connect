@@ -232,7 +232,7 @@ class MessageHistory{
 		$stmt->execute();
 
 		//close db connection
-		$this->closeDB();
+		// $this->closeDB();
 
 	}
 
@@ -241,14 +241,14 @@ class MessageHistory{
 	#update content push delivery response
 	public function updateDeliveryResponse(){
 
-		$sql = 'UPDATE '. $this->tableName.' SET statusMessage =:statusMessage  WHERE transactionId =:transactionId';
+		$sql = 'UPDATE '. $this->tableName.' SET statusMessage = :statusMessage  WHERE transactionId = :transactionId';
 		$stmt = $this->dbConn->prepare($sql);
-		$stmt->bindParam(':statusMessage', $this->deliveryResponse);
+		$stmt->bindParam(':statusMessage', $this->statusMessage);
 		$stmt->bindParam(':transactionId', $this->transactionId);
 		$stmt->execute();
 
 		//close db connection
-		$this->closeDB();
+		// $this->closeDB();
 
 	}
 
@@ -274,7 +274,7 @@ class MessageHistory{
 
 
 		//close db connection planId
-		$this->closeDB();
+		// $this->closeDB();
 
 	}
 
