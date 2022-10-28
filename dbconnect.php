@@ -6,10 +6,10 @@
     class DbConnect{
 
         
-    	private $server = '192.168.193.254';  //'localhost';
+    	private $server = '';  //'localhost';
         private $dbname = 'mobi_connect';
         private $user = 'mefor';
-        private $pass = 'meF0r@1234&5$HaW9(1&McC';
+        private $pass = 'meF0r1&';
         
 
 
